@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-18 03:07:49
+ * @LastEditTime: 2019-08-19 18:05:58
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -72,7 +72,8 @@ module.exports = (api, options, rootOptions) => {
       'stylelint-order': '^3.0.0',
       'tasksfile': '^5.1.0',
       'vue-template-compiler': '^2.6.10',
-      'webstorm-disable-index': '^1.2.0'
+      'webstorm-disable-index': '^1.2.0',
+      "uglifyjs-webpack-plugin": "^2.2.0"
     }
   });
 

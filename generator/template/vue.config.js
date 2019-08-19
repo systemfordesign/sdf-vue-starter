@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-15 18:52:39
+ * @LastEditTime: 2019-08-19 18:05:16
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -14,6 +14,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require('chalk');
 const VueRouterInvokeWebpackPlugin = require('@liwb/vue-router-invoke-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const resolve = (dir) => {
   return path.join(__dirname, './', dir);
@@ -65,19 +66,33 @@ const genPlugins = () => {
 
   if (isProd()) {
     plugins.push(
+       //生产环境自动删除console
+       new UglifyJsPlugin({
+        uglifyOptions: {
+          comments: false,
+          warnings: false,
+          drop_debugger: true,
+          drop_console: true
+        },
+        sourceMap: true,
+        parallel: true,
+      })
+    )
+    plugins.push(
       new CompressionWebpackPlugin({
         filename: '[path].gz[query]',
         algorithm: 'gzip',
         test: new RegExp(
           '\\.(' +
-          ['js', 'css'].join('|') +
+          ['js', 'css', 'html'].join('|') +
           ')$'
         ),
+        // deleteOriginalAssets: true,
         threshold: 10240,
         minRatio: 0.8,
-        cache: true
+        cache: false
       })
-    );
+    )
   }
 
   return plugins;
@@ -100,12 +115,21 @@ module.exports = {
   devServer: {
     open: process.platform === 'darwin',
     host: '0.0.0.0',
-    port: 3000,
+    disableHostCheck: false,
     https: false,
     hotOnly: false,
     overlay: {
       warnings: false,
       errors: true
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',   //代理接口
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/mock'    //代理的路径
+        }
+      }
     }
   },
   // css相关配置
@@ -154,7 +178,7 @@ module.exports = {
 
     config
       .when(process.env.NODE_ENV === 'development',
-        config => config.devtool('cheap-eval-source-map')
+        (config) => config.devtool('cheap-eval-source-map')
       );
 
     // plugin
@@ -163,7 +187,7 @@ module.exports = {
     // runtime.js 内联的形式嵌入
     config
       .plugin('preload')
-      .tap(args => {
+      .tap((args) => {
         args[0].fileBlacklist.push(/runtime\./);
         return args;
       });
@@ -171,7 +195,7 @@ module.exports = {
     // webpack-html-plugin
     config
       .plugin('html')
-      .tap(args => {
+      .tap((args) => {
         args[0].minify = {
           removeComments: true,
           collapseWhitespace: true,
@@ -190,7 +214,7 @@ module.exports = {
     // optimization
     config
       .when(process.env.NODE_ENV === 'production',
-        config => {
+        (config) => {
           config
             .plugin('ScriptExtHtmlWebpackPlugin')
             .use('script-ext-html-webpack-plugin', [{

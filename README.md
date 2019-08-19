@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-15 11:46:10
+ * @LastEditTime: 2019-08-19 09:43:36
  * @LastEditors: Devin Shi
  * @Description: 
  -->
@@ -17,6 +17,8 @@ npm install -g @vue/cli
 
 # 根据远程 preset 创建项目
 vue create --preset vue-devin-cli/vue-preset --clone my-project
+
+vue create --preset systemfordesign/sdf-vue-starter --clone my-project
 
 # 本地预览
 cd my-project && npm run serve
