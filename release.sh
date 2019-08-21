@@ -2,7 +2,7 @@
 # @Author: Devin Shi
  # @Email: yutian.shi@definesys.com
  # @Date: 2019-08-21 16:01:47
- # @LastEditTime: 2019-08-21 16:05:01
+ # @LastEditTime: 2019-08-21 16:08:50
  # @LastEditors: Devin Shi
  # @Description: 
  ###
@@ -29,7 +29,7 @@ read tagName
 echo -e "提交代码"
 git add .
 git commit -m "${tagName}"
-git push orign master
+git push origin master
 
 git tag ${tagName}
 #推到分支上
