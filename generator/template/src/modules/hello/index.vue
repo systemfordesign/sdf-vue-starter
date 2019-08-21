@@ -1,3 +1,11 @@
+<!--
+ * @Author: Devin Shi
+ * @Email: yutian.shi@definesys.com
+ * @Date: 2019-08-20 11:05:34
+ * @LastEditTime: 2019-08-20 13:24:52
+ * @LastEditors: Devin Shi
+ * @Description: 
+ -->
 <template>
   <div class="page page-hello">
     <div class="page-content">
@@ -62,6 +70,7 @@
    */
   // 工具类
   import {formatDate} from 'utils';
+  import NetworkApis from '@/services'
 
   export default {
     data() {
@@ -78,9 +87,8 @@
     methods: {
       movieComingSoon() {
         const data = {};
-        this.$services.octocat({
-          method: 'get',
-          data
+        NetworkApis.requestUsersOctocat({
+          data: data
         }).then((res) => {
           console.log('接口请求成功：' + JSON.stringify(res, null, 2));
         }).catch((err) => {

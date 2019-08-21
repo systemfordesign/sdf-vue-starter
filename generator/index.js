@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-19 18:05:58
+ * @LastEditTime: 2019-08-19 18:24:08
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -19,6 +19,7 @@ module.exports = (api, options, rootOptions) => {
       'report': 'vue-cli-service build --report',
       'svg': 'vsvg -s ./src/icons/svg -t ./src/icons/components --ext js --es6',
       'new': 'plop',
+      'commit': 'git-cz',
       'deploy': 'npm run build && node build/zip.js',
       'release': 'sh build/release.sh'
     },
@@ -27,32 +28,41 @@ module.exports = (api, options, rootOptions) => {
       'build': '生产环境执行构建',
       'analyz': '生产环境执行构建打包分析',
       'deploy': '生产环境执行构建并压缩zip包'
+    },
+    'gitHooks': {
+      'pre-commit': 'lint-staged',
+      'commit-msg': 'node scripts/verify-commit-msg.js'
+    },
+    'config': {
+      'commitizen': {
+        'path': './node_modules/cz-conventional-changelog'
+      }
     }
   });
 
   // 安装一些基础公共库
   api.extendPackage({
     dependencies: {
-      "@liwb/cloud-utils": "^1.3.9",
-      "ant-design-vue": "^1.3.8",
-      "js-file-download": "^0.4.7",
-      "vuex-persistedstate": "^2.5.4",
-      "axios": "^0.19.0",
-      "core-js": "^2.6.5",
-      "magicless": "^1.1.5",
-      "normalize.css": "^8.0.1",
-      "register-service-worker": "^1.6.2",
-      "vue": "^2.6.10",
-      "vue-router": "^3.0.1",
-      "vue-svgicon": "^3.2.2",
-      "vuex": "^3.0.1",
-      "lodash": "^4.17.11",
-      "node-emoji": "^1.10.0",
-      "qs": "^6.7.0",
-      "vue-cropper": "^0.4.9",
-      "vue-i18n": "^8.9.0",
-      "less": "~3.9.0",
-      "less-loader": "^4.1.0"
+      '@liwb/cloud-utils': '^1.3.9',
+      'ant-design-vue': '^1.3.8',
+      'js-file-download': '^0.4.7',
+      'vuex-persistedstate': '^2.5.4',
+      'axios': '^0.19.0',
+      'core-js': '^2.6.5',
+      'magicless': '^1.1.5',
+      'normalize.css': '^8.0.1',
+      'register-service-worker': '^1.6.2',
+      'vue': '^2.6.10',
+      'vue-router': '^3.0.1',
+      'vue-svgicon': '^3.2.2',
+      'vuex': '^3.0.1',
+      'lodash': '^4.17.11',
+      'node-emoji': '^1.10.0',
+      'qs': '^6.7.0',
+      'vue-cropper': '^0.4.9',
+      'vue-i18n': '^8.9.0',
+      'less': '~3.9.0',
+      'less-loader': '^4.1.0'
     },
     devDependencies: {
       '@ascendancyy/vue-cli-plugin-stylelint': '^1.1.2',
@@ -73,7 +83,7 @@ module.exports = (api, options, rootOptions) => {
       'tasksfile': '^5.1.0',
       'vue-template-compiler': '^2.6.10',
       'webstorm-disable-index': '^1.2.0',
-      "uglifyjs-webpack-plugin": "^2.2.0"
+      'uglifyjs-webpack-plugin': '^2.2.0'
     }
   });
 

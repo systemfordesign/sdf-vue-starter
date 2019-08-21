@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-19 18:05:16
+ * @LastEditTime: 2019-08-20 15:36:08
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -44,12 +44,12 @@ const genPlugins = () => {
       clear: false
     }),
     new VueRouterInvokeWebpackPlugin({
-      dir: 'src/views',
+      dir: 'src/modules',
       // must set the alias for the dir option which you have set
-      alias: '@/views',
+      alias: '@/modules',
       mode: 'hash',
       routerDir: 'src/router',
-      ignore: ['images', 'components'],
+      ignore: ['images', 'components', '.js'],
       redirect: [
         {
           redirect: '/hello',
