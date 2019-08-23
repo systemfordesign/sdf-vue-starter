@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-15 18:39:21
+ * @LastEditTime: 2019-08-23 15:35:34
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -14,9 +14,7 @@ import './plugins'
 import './icons';
 import './filters';
 import './services';
-<%_ if (options['ui-framework'] === 'ant') { _%>
 import './vendor/ant';
-<%_ } _%>
 import store from './store'
 import './registerServiceWorker'
 
