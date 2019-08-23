@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-22 17:37:51
+ * @LastEditTime: 2019-08-23 15:10:25
  * @LastEditors: Devin Shi
  * @Description: 
  -->
@@ -18,6 +18,10 @@
 
 <style lang="less" rel="stylesheet/less">
   @import "~@/assets/less/app.less";
+
+  body {
+    height: 100vh;
+  }
 
   #app {
     width: 100%;
