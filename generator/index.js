@@ -2,7 +2,7 @@
  * @Author: Devin Shi
  * @Email: yutian.shi@definesys.com
  * @Date: 2019-08-11 23:15:16
- * @LastEditTime: 2019-08-19 18:24:08
+ * @LastEditTime: 2019-08-23 14:59:59
  * @LastEditors: Devin Shi
  * @Description: 
  */
@@ -128,15 +128,7 @@ module.exports = (api, options, rootOptions) => {
       .forEach(path => delete files[path]);
   });
 
-  if (options['ui-framework'] === 'element-ui') {
-    require('./element.js')(api, options);
-  } else if (options['ui-framework'] === 'iview') {
-    require('./iview.js')(api, options);
-  } else if (options['ui-framework'] === 'ant') {
-    require('./ant.js')(api, options);
-  } else if (options['ui-framework'] === 'hui') {
-    require('./hui.js')(api, options);
-  }
+  require('./ant.js')(api, options);
 
   // 公共基础目录和文件
   api.render('./template');
